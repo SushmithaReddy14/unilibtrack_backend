@@ -1,9 +1,16 @@
 import mysql.connector
 
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
 def get_db_connection():
     return mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password = '140803',
-        database='unilibtrack_db',
+        host=os.getenv('MYSQL_HOST'),
+        user=os.getenv('MYSQL_USER'),
+        password=os.getenv('MYSQL_PASSWORD'),
+        database=os.getenv('MYSQL_DATABASE'),
+        port=int(os.getenv('MYSQL_PORT'))
     )
