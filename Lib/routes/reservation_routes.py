@@ -18,7 +18,7 @@ def reserve_book():
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO Reservations (user_id, book_id, username, book_name)
+        INSERT INTO reservations (user_id, book_id, username, book_name)
         VALUES (%s, %s, %s, %s)
     """, (user_id, book_id, username, book_name))
     conn.commit()

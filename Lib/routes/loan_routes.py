@@ -30,7 +30,7 @@ def add_loan():
      book_title = book['title']
 
      cursor.execute("""
-            INSERT INTO Loans (user_id, book_id, due_date, book_title)
+            INSERT INTO loans (user_id, book_id, due_date, book_title)
             VALUES (%s, %s, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY), %s)
         """, (user_id, book_id, book_title))
      
@@ -40,7 +40,7 @@ def add_loan():
         """, (user_id, book_id))
 
      cursor.execute("""
-            UPDATE Books SET available_copies = available_copies - 1
+            UPDATE books SET available_copies = available_copies - 1
             WHERE book_id = %s AND available_copies > 0
         """, (book_id,))
      conn.commit()
@@ -57,7 +57,7 @@ def return_book():
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        UPDATE Loans
+        UPDATE loans
         SET return_date = CURRENT_DATE(),
             fine = CASE
                         WHEN CURRENT_DATE() > due_date THEN DATEDIFF(CURRENT_DATE(), due_date) * 1.00
@@ -73,7 +73,7 @@ def return_book():
 
     # Update available copies
     cursor.execute("""
-        UPDATE Books
+        UPDATE books
         SET available_copies = available_copies + 1
         WHERE book_id =  %s
     """, (book_id,))
