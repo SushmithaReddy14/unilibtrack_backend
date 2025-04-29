@@ -13,7 +13,7 @@ app.secret_key = 'ff#%455hjbk'
 
 allowed_origins = [
     "http://localhost:3000",  
-    "https://unilibtrack-backend.onrender.com"
+    "https://unilibtrack-frontend.onrender.com/"
 ]
 
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": allowed_origins}},)
