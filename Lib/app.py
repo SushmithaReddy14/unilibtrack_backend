@@ -10,7 +10,13 @@ from routes.auth_routes import auth_bp
 
 app = Flask(__name__)
 app.secret_key = 'ff#%455hjbk'
-CORS(app, supports_credentials=True)
+
+allowed_origins = [
+    "http://localhost:3000",  
+    "https://unilibtrack-backend.onrender.com"
+]
+
+CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": allowed_origins}},)
 
 app.register_blueprint(user_bp, url_prefix="/users")
 app.register_blueprint(book_bp, url_prefix="/books")
