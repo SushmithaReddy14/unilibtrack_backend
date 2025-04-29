@@ -11,21 +11,10 @@ from routes.auth_routes import auth_bp
 app = Flask(__name__)
 app.secret_key = 'ff#%455hjbk'
 
-CORS(app, resources={
-    r"/*": {
-        "origins": [
-            "https://unilibtrack-frontend.onrender.com",
-            "http://localhost:3000"
-        ],
-        "supports_credentials": True,
-        "allow_headers": [
-            "Content-Type",
-            "Authorization",
-            "Access-Control-Allow-Credentials",
-            "Access-Control-Allow-Origin"
-        ]
-    }
-})
+CORS(app, supports_credentials=True, origins=[
+    "https://unilibtrack-frontend.onrender.com",
+    "http://localhost:3000"
+])
 
 app.register_blueprint(user_bp, url_prefix="/users")
 app.register_blueprint(book_bp, url_prefix="/books")
