@@ -11,6 +11,9 @@ from routes.auth_routes import auth_bp
 app = Flask(__name__)
 app.secret_key = 'ff#%455hjbk'
 
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['SESSION_COOKIE_SECURE'] = True
+
 CORS(app, supports_credentials=True, origins=[
     "https://unilibtrack-frontend.onrender.com",
     "http://localhost:3000"
